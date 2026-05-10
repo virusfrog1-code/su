@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+dist
+coverage
+.env
+.env.local
+.env.*.local
+*.log
+*.tsbuildinfo
+cache
+artifacts
+typechain-types
+.vercel
+.tools

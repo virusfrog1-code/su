@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(86, 243, 154, 0.13), transparent 28rem),
+    radial-gradient(circle at 80% 10%, rgba(57, 213, 255, 0.12), transparent 24rem),
+    linear-gradient(180deg, #050607 0%, #0a0d11 46%, #050607 100%);
+  color: #f4f7fb;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 86%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.ritual-ring {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid rgba(86, 243, 154, 0.5);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(86, 243, 154, 0.18), transparent 44%),
+    conic-gradient(from 30deg, rgba(86, 243, 154, 0.7), transparent, rgba(57, 213, 255, 0.75), transparent, rgba(86, 243, 154, 0.7));
+  box-shadow: 0 0 60px rgba(86, 243, 154, 0.18), inset 0 0 60px rgba(57, 213, 255, 0.1);
+}
+
+.ritual-ring::before,
+.ritual-ring::after {
+  position: absolute;
+  content: "";
+  border-radius: 999px;
+}
+
+.ritual-ring::before {
+  inset: 12%;
+  border: 1px dashed rgba(244, 247, 251, 0.38);
+}
+
+.ritual-ring::after {
+  inset: 32%;
+  border: 1px solid rgba(57, 213, 255, 0.7);
+  background: rgba(5, 6, 7, 0.76);
+}
+
+.terminal-panel {
+  border: 1px solid rgba(215, 221, 229, 0.12);
+  background: rgba(8, 11, 15, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+}
+

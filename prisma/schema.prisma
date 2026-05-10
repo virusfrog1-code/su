@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MintStatus {
+  pending
+  success
+  failed
+}
+
+enum MintMode {
+  X_POST
+  NO_X_FALLBACK
+  FREE_X
+}
+
+model User {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SummonNonce {
+  id            String   @id @default(cuid())
+  walletAddress String
+  xUserId       String?
+  nonce         String   @unique
+  mode          MintMode @default(X_POST)
+  used          Boolean  @default(false)
+  expiresAt     DateTime
+  createdAt     DateTime @default(now())
+
+  @@index([walletAddress])
+  @@index([xUserId])
+  @@index([expiresAt])
+}
+
+model TweetVerification {
+  id             String   @id @default(cuid())
+  walletAddress  String
+  xUserId        String?
+  xUsername      String?
+  tweetId        String   @unique
+  tweetUrl       String
+  tweetText      String
+  authorId       String?
+  valid          Boolean
+  reason         String?
+  score          Int?
+  mintMultiplier Float?
+  nonce          String
+  createdAt      DateTime @default(now())
+
+  @@index([walletAddress])
+  @@index([createdAt])
+}
+
+model MintRecord {
+  id             String     @id @default(cuid())
+  walletAddress  String
+  xUserId        String?
+  tweetId        String?    @unique
+  nonce          String?
+  mode           MintMode   @default(X_POST)
+  shares         String     @default("0")
+  shareUnits     Int        @default(0)
+  priceWei       String     @default("0")
+  totalPaidWei   String     @default("0")
+  amount         String?
+  score          Int?
+  mintMultiplier Float?
+  txHash         String?
+  isMock         Boolean    @default(false)
+  chainId        Int?
+  contractAddress String?
+  authorizationDeadline Int?
+  userSignature  String?
+  status         MintStatus @default(pending)
+  createdAt      DateTime   @default(now())
+
+  @@index([walletAddress])
+  @@index([createdAt])
+  @@index([status])
+}
+
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model MintConfig {
+  id                          String   @id @default(cuid())
+  totalSharesCap              String   @default("21000")
+  totalShareUnitsCap          Int      @default(210000)
+  standardPriceWei            String   @default("5000000000000000")
+  standardPricePerUnitWei     String   @default("500000000000000")
+  fallbackPriceWei            String   @default("7000000000000000")
+  fallbackPricePerUnitWei     String   @default("700000000000000")
+  maxStandardSharesPerWallet  String   @default("100")
+  maxStandardShareUnits       Int      @default(1000)
+  maxFallbackSharesPerWallet  String   @default("20")
+  maxFallbackShareUnits       Int      @default(200)
+  freeSharesPerWalletX        String   @default("0.1")
+  freeShareUnits              Int      @default(1)
+  paused                      Boolean  @default(false)
+  updatedAt                   DateTime @updatedAt
+}
+
+model WalletXBinding {
+  id            String   @id @default(cuid())
+  walletAddress String   @unique
+  xUserId       String?  @unique
+  xUsername     String?
+  bindTweetId   String?  @unique
+  bindCode      String
+  verified      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model WalletMintStats {
+  id                    String   @id @default(cuid())
+  walletAddress         String   @unique
+  paidStandardShares    String   @default("0")
+  paidStandardUnits     Int      @default(0)
+  paidFallbackShares    String   @default("0")
+  paidFallbackUnits     Int      @default(0)
+  freeSharesClaimed     String   @default("0")
+  freeShareUnitsClaimed Int      @default(0)
+  totalSharesMinted     String   @default("0")
+  totalShareUnitsMinted Int      @default(0)
+  updatedAt             DateTime @updatedAt
+}
+
+model GlobalMintStats {
+  id                    String   @id @default(cuid())
+  totalSharesMinted     String   @default("0")
+  totalShareUnitsMinted Int      @default(0)
+  totalPaidWei          String   @default("0")
+  updatedAt             DateTime @updatedAt
+}
