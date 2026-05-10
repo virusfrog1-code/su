@@ -31,7 +31,7 @@ export function publicRequiredPhrase() {
 }
 
 export function publicSummonXHandle() {
-  return process.env.NEXT_PUBLIC_SUMMON_X_HANDLE || "SummonAI";
+  return process.env.NEXT_PUBLIC_SUMMON_X_HANDLE || "Summon_eth";
 }
 
 export function publicGrokXHandle() {

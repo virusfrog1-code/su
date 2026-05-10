@@ -214,7 +214,7 @@ export function MintClient() {
   const [toast, setToast] = useState("");
   const [timeRemainingMs, setTimeRemainingMs] = useState<number | null>(null);
   const [activeWallet, setActiveWallet] = useState<string | undefined>();
-  const summonXHandle = process.env.NEXT_PUBLIC_SUMMON_X_HANDLE || "SummonAI";
+  const summonXHandle = process.env.NEXT_PUBLIC_SUMMON_X_HANDLE || "Summon_eth";
   const grokXHandle = process.env.NEXT_PUBLIC_GROK_X_HANDLE || "grok";
   const requiredHashtag = process.env.NEXT_PUBLIC_REQUIRED_HASHTAG || "#SUMMON";
   const secondaryHashtag = process.env.NEXT_PUBLIC_REQUIRED_SECONDARY_HASHTAG || "#GrokMint";

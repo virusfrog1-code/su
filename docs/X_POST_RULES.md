@@ -4,7 +4,7 @@ SUMMON uses X posts as public mint proofs. Users may edit the default post text,
 
 ## Required Bind Tweet Fields
 
-- `@SummonAI` or the handle configured by `NEXT_PUBLIC_SUMMON_X_HANDLE`
+- `@Summon_eth` or the handle configured by `NEXT_PUBLIC_SUMMON_X_HANDLE`
 - `@grok` or the handle configured by `NEXT_PUBLIC_GROK_X_HANDLE`
 - `#SUMMON`
 - `#GrokMint`
@@ -14,7 +14,7 @@ SUMMON uses X posts as public mint proofs. Users may edit the default post text,
 
 ## Required Mint Tweet Fields
 
-- `@SummonAI` or the configured official handle
+- `@Summon_eth` or the configured official handle
 - `@grok` or the configured Grok handle
 - `#SUMMON`
 - `#GrokMint`

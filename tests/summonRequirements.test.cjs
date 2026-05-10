@@ -28,7 +28,7 @@ const { validateSummonTweetRequirements } = loadTypeScriptModule(
 const baseInput = {
   shortWallet: "0x2B9b...CcC9",
   code: "SUMMON-8F3K2A",
-  summonHandle: "SummonAI",
+  summonHandle: "Summon_eth",
   grokHandle: "grok",
   requiredHashtag: "#SUMMON",
   secondaryHashtag: "#GrokMint",
@@ -43,7 +43,7 @@ function validTweet(extra = "") {
   return [
     "I changed the copy, added 中文 and emoji ✨, but kept the proof.",
     "Post to Summon.",
-    "@SummonAI @grok $SUMMON",
+    "@Summon_eth @grok $SUMMON",
     "Wallet: 0x2B9b...CcC9",
     "Summon Code: SUMMON-8F3K2A",
     "#SUMMON #GrokMint #AIMeme",
@@ -62,9 +62,9 @@ test("edited copy with required tokens still passes", () => {
 });
 
 test("missing official mention fails", () => {
-  const result = validate(validTweet().replace("@SummonAI ", ""));
+  const result = validate(validTweet().replace("@Summon_eth ", ""));
   assert.equal(result.valid, false);
-  assert.ok(result.missing.includes("Missing official mention @SummonAI"));
+  assert.ok(result.missing.includes("Missing official mention @Summon_eth"));
 });
 
 test("missing grok mention fails", () => {
